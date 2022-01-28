@@ -1,0 +1,18 @@
+
+.heading {
+	color: tomato;
+	font-size: 25px;
+	text-transform: uppercase;
+	padding: 10px 0px 0px 0px;
+	cursor: pointer;
+	&__text {
+		color: #fff;
+		text-transform: lowercase;
+		@media (any-hover: hover){
+			&:hover{
+				color: tomato;
+				transition: color 0.3s ease 0s;
+			}
+		}
+	}
+}
