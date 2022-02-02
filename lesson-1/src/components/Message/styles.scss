@@ -8,11 +8,5 @@
 	&__text {
 		color: #fff;
 		text-transform: lowercase;
-		@media (any-hover: hover){
-			&:hover{
-				color: tomato;
-				transition: color 0.3s ease 0s;
-			}
-		}
 	}
 }
