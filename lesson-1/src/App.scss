@@ -1,0 +1,30 @@
+.App {
+	display: flex;
+	background-color: #293241;
+	min-height: 100vh;
+	flex: 1 1 100%;
+}
+
+.App-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  width: 100%;
+}
+
+.App-message {
+	padding: 0px 0px 0px 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	gap: 20px;
+}
+
+.App-form {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+

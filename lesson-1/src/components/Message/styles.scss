@@ -1,0 +1,13 @@
+.message {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	&__author {
+		text-transform: uppercase;
+		color: #98c1d9;
+	}
+	&__text {
+		color: #e0fbfc;
+		font-size: 23px;
+	}
+}

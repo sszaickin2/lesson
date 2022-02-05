@@ -1,0 +1,37 @@
+.form {
+	display: flex;
+	flex: 1 1 100%;
+}
+
+.form-input {
+	width: 100%;
+	background-color: transparent;
+	height: 50px;
+	color: #fff;
+	padding: 0px 0px 0px 20px;
+	border: 2px solid #e0fbfc;
+	outline: none;
+	font-size: 18px;
+	&:focus {
+		border: 2px solid #ee6c4d;
+		transition: all 0.3s ease 0s;
+	 }
+	&::placeholder{
+		color: #e0fbfc;
+		opacity: 0.5;
+	}
+}
+
+.form-button {
+	color: #fff;
+	background-color: transparent;
+	border: 2px solid #e0fbfc;
+	font-size: 18px;
+	@media (any-hover: hover){
+		&:hover{
+			border: 2px solid #ee6c4d;
+			color: #ee6c4d;
+			transition: all 0.3s ease 0s;
+		}
+	}
+}

@@ -1,0 +1,26 @@
+.App-chats {
+	display: flex;
+	flex-direction: column;
+	width: 400px;
+	border-right: 2px solid #e0fbfc;
+	&__link {
+		display: flex;
+		align-items: center;
+		color: #e0fbfc;
+		height: 60px;
+		padding: 0px 0px 0px 15px;
+		border-bottom: 2px solid #e0fbfc;
+		font-size: 20px;
+		cursor: pointer;
+		@media (any-hover: hover){
+			&:hover{
+				color: #293241;
+				background-color: #e0fbfc;
+				transition: all 0.3s ease 0s;
+			}
+		}
+	}
+	&.css-h4y409-MuiList-root {
+		padding: 0;
+	}
+}
