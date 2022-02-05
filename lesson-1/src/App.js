@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import { Counter } from './components/Counter';
+import React, { useEffect, useRef, useState } from 'react';
+import './App.scss';
 import { Form } from './components/Form';
 import { AUTHORS } from './utils/constants';
 import { MessageList } from './components/MessageList';
+import { ChatList } from './components/ChatList';
+import { FormMui } from './components/FormMui';
 
 
 function App() {
 	const [messageList, setMessageList] = useState([]);
+	const messagesEnd = useRef();
 
 	const handleAddMessage = (text) => {
 		sendMessage(text, AUTHORS.ME)
@@ -17,11 +19,13 @@ function App() {
 		const newMsg = {
 			text,
 			author,
+			id: `msg-${Date.now()}`,
 		}
 		setMessageList((prevMessageList) => [...prevMessageList, newMsg]);
 	}
 
 	useEffect(() => {
+		messagesEnd.current?.scrollIntoView();
 		let timeout;
 		if (messageList[messageList.length - 1]?.author === AUTHORS.ME) {
 			timeout = setTimeout(() => {
@@ -36,11 +40,19 @@ function App() {
 
 	return (
 		<div className="App">
-			<header className="App-header">
-				<MessageList messages={messageList} />
-				<Counter />
-				<Form onSubmit={handleAddMessage} />
-			</header >
+			<ChatList />
+			<div className="App-content">
+				<div className='App-message'>
+					<MessageList messages={messageList} />
+					<div ref={messagesEnd} />
+				</div>
+
+				<div className='App-form'>
+					<Form onSubmit={handleAddMessage} />
+					<FormMui onSubmit={handleAddMessage} />
+				</div>
+			</div>
+
 		</div>
 	);
 }

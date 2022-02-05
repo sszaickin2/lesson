@@ -1,12 +1,13 @@
-
-.heading {
-	color: tomato;
-	font-size: 25px;
-	text-transform: uppercase;
-	padding: 10px 0px 0px 0px;
-	cursor: pointer;
+.message {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	&__author {
+		text-transform: uppercase;
+		color: #98c1d9;
+	}
 	&__text {
-		color: #fff;
-		text-transform: lowercase;
+		color: #e0fbfc;
+		font-size: 23px;
 	}
 }

@@ -1,15 +1,17 @@
 import React from "react";
-import "./styles.scss"
+import PropTypes from "prop-types";
+import "./styles.scss";
 
+export const Message = ({ text, author }) => {
+	return (
+		<div className="message">
+			<div className="message__author">{author}:</div>
+			<span className="message__text">{text}</span>
+		</div>
+	);
+};
 
-export class Message extends React.Component {
-	render() {
-		const { text, author } = this.props;
-		return (
-			<span className="heading">
-				{author}:
-				<span className="heading__text">{text}</span>
-			</span>
-		);
-	}
+Message.propTypes = {
+	text: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.number]),
+	author: PropTypes.string.isRequired,
 }
