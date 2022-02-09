@@ -5,7 +5,7 @@ import "./styles.scss";
 export const Message = ({ text, author }) => {
 	return (
 		<div className="message">
-			<div className="message__author">{author}:</div>
+			<span className="message__author">{author}:</span>
 			<span className="message__text">{text}</span>
 		</div>
 	);

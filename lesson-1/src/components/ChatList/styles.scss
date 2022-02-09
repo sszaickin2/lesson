@@ -1,26 +1,39 @@
-.App-chats {
-	display: flex;
-	flex-direction: column;
-	width: 400px;
-	border-right: 2px solid #e0fbfc;
-	&__link {
-		display: flex;
-		align-items: center;
-		color: #e0fbfc;
-		height: 60px;
-		padding: 0px 0px 0px 15px;
-		border-bottom: 2px solid #e0fbfc;
-		font-size: 20px;
-		cursor: pointer;
+@import '../../change.scss';
+
+.chat {
+	border-right: 2px solid $hrColor;
+	min-width: 300px;
+	// .chat__content 
+	&__content  {
+	}
+	// .chat__list
+	&__list {
+		padding: 0;
+		margin: 0;
+		list-style-type: none;
+	}
+	// .chat__item
+	&__item {
 		@media (any-hover: hover){
 			&:hover{
-				color: #293241;
-				background-color: #e0fbfc;
+				background-color: $hoverColor;
 				transition: all 0.3s ease 0s;
+				box-shadow: 0 0 15px rgba(209, 203, 203, 0.3);
 			}
 		}
 	}
-	&.css-h4y409-MuiList-root {
-		padding: 0;
+	// .chat__link
+	&__link {
+		padding: 0px 0px 0px 20px;
+		text-decoration: none;
+		color: $textColor;
+		font-size: 18px;
+		font-weight: bold;
+		display: flex;
+		align-items: center;
+		height: 50px;
+		&:last-child{
+			border-bottom: 2px solid $hrColor;
+		}
 	}
 }

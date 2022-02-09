@@ -1,4 +1,4 @@
-import { List, ListItem } from "@mui/material";
+import { Link, Outlet } from "react-router-dom";
 import "./styles.scss"
 
 const chats = [
@@ -24,8 +24,22 @@ const chats = [
 	}
 ];
 
+
+
+
 export const ChatList = () => (
-	<List className='App-chats'>
-		{chats.map(chat => <ListItem className='App-chats__link' key={chat.id}>{chat.name}</ListItem>)}
-	</List>
-)
+	<>
+		<section className="chat">
+			<div className="chat__content">
+				<ul className='chat__list'>
+					{chats.map((chat) => (
+						<li className='chat__item' key={chat.id}>
+							<Link className='chat__link' to={`/chats/${chat.id}`}>{chat.name}</Link>
+						</li>
+					))}
+				</ul>
+			</div>
+		</section>
+		<Outlet />
+	</>
+);

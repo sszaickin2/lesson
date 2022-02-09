@@ -21,9 +21,9 @@ export const Form = ({ onSubmit }) => {
 	}, []);
 
 	return (
-		<form className="form" onSubmit={handleSubmit}>
-			<input className="form-input" ref={textFocus} value={value} onChange={handleChange} type="text" placeholder="Написать сообщение..." />
-			<button className="form-button" type="submit">Отправить</button>
+		<form className="send" onSubmit={handleSubmit}>
+			<input className="send__input" ref={textFocus} value={value} onChange={handleChange} type="text" placeholder="Написать сообщение..." />
+			<button className="send__button" type="submit">Отправить</button>
 		</form>
 	)
 }
