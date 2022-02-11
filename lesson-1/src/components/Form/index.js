@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react"
-
 import "./styles.scss"
+
 
 export const Form = ({ onSubmit }) => {
 	const [value, setValue] = useState('');

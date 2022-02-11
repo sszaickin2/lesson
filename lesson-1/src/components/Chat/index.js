@@ -7,7 +7,7 @@ import './styles.scss'
 
 
 export function Chat() {
-	
+
 	const { chatId } = useParams();
 
 	const [messageList, setMessageList] = useState({
@@ -54,7 +54,6 @@ export function Chat() {
 	if (!messageList[chatId]) {
 		return <Navigate to="/chats" replace />
 	}
-
 
 	return (
 		<section className="form">

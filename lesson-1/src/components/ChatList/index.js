@@ -25,8 +25,6 @@ const chats = [
 ];
 
 
-
-
 export const ChatList = () => (
 	<>
 		<section className="chat">
