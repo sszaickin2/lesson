@@ -1,0 +1,25 @@
+@import '../../change.scss';
+
+.App {
+	display: flex;
+	justify-content: flex-start;
+	position: relative;
+	height: 100vh;
+}
+
+.menu {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 20px 0px 0px 0px;
+	border-right: 2px solid $hrColor;
+	// min-height: 100vh;
+	box-shadow: 0 0 2px #fff;
+	// .menu__link
+	&__link {
+		padding: 0px 10px 0px 10px;
+		font-size: 18px;
+		text-transform: uppercase;
+		text-decoration: none;
+	}
+}
