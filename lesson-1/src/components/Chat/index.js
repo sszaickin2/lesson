@@ -6,18 +6,9 @@ import { Form } from '../Form';
 import './styles.scss'
 
 
-export function Chat() {
+export function Chat({ messages, addMessage }) {
 
 	const { chatId } = useParams();
-
-	const [messageList, setMessageList] = useState({
-		chat1: [],
-		chat2: [],
-		chat3: [],
-		chat4: [],
-		chat5: [],
-	});
-
 	const messagesEnd = useRef();
 
 	const handleAddMessage = (text) => {
@@ -30,16 +21,13 @@ export function Chat() {
 			author,
 			id: `msg-${Date.now()}`,
 		}
-		setMessageList((prevMessageList) => ({
-			...prevMessageList,
-			[chatId]: [...prevMessageList[chatId], newMsg],
-		}));
+		addMessage(chatId, newMsg);
 	}
 
 	useEffect(() => {
 		messagesEnd.current?.scrollIntoView();
 		let timeout;
-		if (messageList[chatId]?.[messageList[chatId]?.length - 1]?.author === AUTHORS.ME) {
+		if (messages[chatId]?.[messages[chatId]?.length - 1]?.author === AUTHORS.ME) {
 			timeout = setTimeout(() => {
 				sendMessage('Шалом', AUTHORS.BOT)
 			}, 1000)
@@ -48,24 +36,22 @@ export function Chat() {
 		return () => {
 			clearTimeout(timeout)
 		}
-	}, [messageList]);
+	}, [messages]);
 
 
-	if (!messageList[chatId]) {
+	if (!messages[chatId]) {
 		return <Navigate to="/chats" replace />
 	}
 
 	return (
-		<section className="form">
-			<div className="form__content">
-				<div className='form__message'>
-					<MessageList messages={messageList[chatId]} />
-					<div ref={messagesEnd} />
-				</div>
-				<div className='form__send send-form'>
-					<Form onSubmit={handleAddMessage} />
-				</div>
+		<div className="form">
+			<div className='form__message'>
+				<MessageList messages={messages[chatId]} />
+				<div ref={messagesEnd} />
 			</div>
-		</section>
+			<div className='form__send send-form'>
+				<Form onSubmit={handleAddMessage} />
+			</div>
+		</div>
 	);
 }

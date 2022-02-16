@@ -1,6 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import { Button, TextField } from "@mui/material";
-
 import "./styles.scss";
 
 
@@ -24,8 +22,7 @@ export const FormMui = ({ onSubmit }) => {
 
 	return (
 		<form className="mui-form" onSubmit={handleSubmit}>
-			<TextField className="mui-input" inputRef={inputFocus} value={value} onChange={handleChange} placeholder="Написать сообщение..." />
-			<Button className="mui-button" type="submit">Отправить</Button>
+			<input className="mui-form__input" type="text" ref={inputFocus} value={value} onChange={handleChange} placeholder="Название чата..." />
 		</form>
 	)
 }
