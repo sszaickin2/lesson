@@ -28,7 +28,7 @@ export const Profile = () => {
 
 	return (
 		<>
-			<div className="profile">
+			<section className="profile">
 				<h3 className="profile__heading">Profile</h3>
 				<div>
 					<button onClick={handleClick}>Click me</button>
@@ -39,7 +39,7 @@ export const Profile = () => {
 				</div>
 
 				<FormMui onSubmit={handleChangeName} />
-			</div>
+			</section>
 		</>
 	)
 }

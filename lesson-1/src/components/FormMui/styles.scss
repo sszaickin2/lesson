@@ -1,0 +1,18 @@
+@import "../../change.scss";
+
+.mui-form {
+	// .mui-form__input
+	&__input {
+		width: 94%;
+		height: 40px;
+		background-color: transparent;
+		color: $textColor;
+		font-size: 18px;
+		padding: 0px 0px 0px 15px;
+		border: 2px solid $hrColor;
+		outline: none;
+		&:focus {
+			border: 2px solid $hoverColor;
+		}
+	}
+}

@@ -1,20 +1,8 @@
-@import '../../change.scss';
+@import "../../change.scss";
 
-// .message {
-// 	display: flex;
-// 	gap: 10px;
-// 	align-items: center;
-// 	padding: 0px 0px 10px 15px;
-// 	// .message__author
-// 	&__author {
-// 		font-size: 20px;
-// 		text-transform: uppercase;
-// 		color: $hoverColor;
-// 		font-weight: bold;
-// 	}
-// 	// .message__text
-// 	&__text {
-// 		color: $textColor;
-// 		font-size: 18px;
-// 	}
-// }
+.message {
+	// .message__author
+	&__author {}
+	// .message__text
+	&__text {}
+}

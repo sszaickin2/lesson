@@ -1,20 +1,16 @@
-@import '../../change.scss';
+@import "../../change.scss";
 
-// .form {
-// 	display: flex;
-// 	align-items: flex-end;
-// 	flex: 1 1 100%;
-	
-// 	// .form__content
-// 	&__content {
-// 		min-width: 100%;
-// 	}
-// 	// .form__message
-// 	&__message {
-// 		display: flex;
-// 		flex-direction: column;
-// 		overflow-y: auto;
-// 		width: 100%;
-// 		height: 895px;
-// 	}
-// }
+.chat {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	// .chat__message
+	&__message {
+		padding: 0px 0px 20px 10px;
+	}
+	// .chat__send
+	&__send {
+		width: 100%;
+		display: flex;
+	}
+}

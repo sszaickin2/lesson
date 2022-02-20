@@ -1,14 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { AUTHORS } from '../../utils/constants';
 import { MessageList } from '../MessageList';
 import { Form } from '../Form';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectMessages } from '../../store/messages/selectors';
+import { addMessageWithThunk } from '../../store/messages/actions';
 import './styles.scss'
 
 
-export function Chat({ messages, addMessage }) {
+export function Chat() {
 
 	const { chatId } = useParams();
+	const messages = useSelector(selectMessages);
+	const dispatch = useDispatch();
 	const messagesEnd = useRef();
 
 	const handleAddMessage = (text) => {
@@ -21,21 +26,11 @@ export function Chat({ messages, addMessage }) {
 			author,
 			id: `msg-${Date.now()}`,
 		}
-		addMessage(chatId, newMsg);
+		dispatch(addMessageWithThunk(chatId, newMsg));
 	}
 
 	useEffect(() => {
 		messagesEnd.current?.scrollIntoView();
-		let timeout;
-		if (messages[chatId]?.[messages[chatId]?.length - 1]?.author === AUTHORS.ME) {
-			timeout = setTimeout(() => {
-				sendMessage('Шалом', AUTHORS.BOT)
-			}, 1000)
-
-		}
-		return () => {
-			clearTimeout(timeout)
-		}
 	}, [messages]);
 
 
@@ -44,12 +39,12 @@ export function Chat({ messages, addMessage }) {
 	}
 
 	return (
-		<div className="form">
-			<div className='form__message'>
+		<div className="chat">
+			<div className='chat__message'>
 				<MessageList messages={messages[chatId]} />
 				<div ref={messagesEnd} />
 			</div>
-			<div className='form__send send-form'>
+			<div className='chat__send send-form'>
 				<Form onSubmit={handleAddMessage} />
 			</div>
 		</div>

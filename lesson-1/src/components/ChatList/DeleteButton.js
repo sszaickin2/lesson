@@ -1,8 +1,11 @@
-import { useCallback } from "react"
+import { useDispatch } from "react-redux";
+import { deleteChat } from "../../store/chats/actions";
 
-export const DeleteButton = ({ id, onClick }) => {
-	const handleClick = useCallback(() => {
-		onClick(id)
-	}, [onClick, id])
-	return <span className="chat__delete" onClick={handleClick}>X</span>
+export const DeleteButton = ({ id }) => {
+	const dispatch = useDispatch();
+
+	const handleDeleteChat = () => {
+		dispatch(deleteChat(id));
+	}
+	return <span className="chat-list__delete" onClick={handleDeleteChat}>X</span>
 }
