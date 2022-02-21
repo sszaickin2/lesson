@@ -1,0 +1,16 @@
+@import "../../change.scss";
+
+.chat {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	// .chat__message
+	&__message {
+		padding: 0px 0px 20px 10px;
+	}
+	// .chat__send
+	&__send {
+		width: 100%;
+		display: flex;
+	}
+}

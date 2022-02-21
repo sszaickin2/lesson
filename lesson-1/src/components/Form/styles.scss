@@ -1,0 +1,12 @@
+@import "../../index.scss"; 
+
+.send {
+	display: flex;
+	width: 100%;
+	// .send__input
+	&__input {
+		width: 100%;
+	}
+	// .send__button
+	&__button {}
+}
