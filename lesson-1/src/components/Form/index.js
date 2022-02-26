@@ -1,29 +1,28 @@
-import { useState, useEffect, useRef } from "react"
-import "./styles.scss"
-
+import { useEffect, useRef, useState } from "react";
 
 export const Form = ({ onSubmit }) => {
-	const [value, setValue] = useState('');
-	const textFocus = useRef();
+	const [value, setValue] = useState("");
+	const textField = useRef();
 
 	const handleChange = (e) => {
 		setValue(e.target.value);
-	}
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		onSubmit(value);
 		setValue("");
-	}
+	};
 
 	useEffect(() => {
-		textFocus.current?.focus();
+		textField.current?.focus();
 	}, []);
 
 	return (
-		<form className="send" onSubmit={handleSubmit}>
-			<input className="send__input" ref={textFocus} value={value} onChange={handleChange} type="text" placeholder="Написать сообщение..." />
-			<button className="send__button" type="submit">Отправить</button>
+		<form onSubmit={handleSubmit}>
+			<input value={value} ref={textField} onChange={handleChange} type="text" />
+			<input type="submit" />
 		</form>
-	)
-}
+	);
+};
+

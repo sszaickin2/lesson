@@ -1,9 +1,9 @@
 import { CHANGE_NAME, CHANGE_SHOW_NAME } from "./actions";
 
 const initialState = {
-	name: 'Default',
-	showName: false,
-}
+	name: "Default",
+	showName: true,
+};
 
 export const profileReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -16,10 +16,10 @@ export const profileReducer = (state = initialState, action) => {
 		case CHANGE_NAME: {
 			return {
 				...state,
-				name: action.payload,
+				name: action.name,
 			};
 		}
 		default:
 			return state;
 	}
-}
+};

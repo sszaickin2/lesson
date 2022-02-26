@@ -1,8 +1,17 @@
-@import "../../change.scss";
+@import "../../index.scss";
 
-.message {
-	// .message__author
-	&__author {}
-	// .message__text
-	&__text {}
+.text-chat {
+	// .text-chat__author
+	&__author {
+		font-size: 18px;
+		color: $hrColor;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	// .text-chat__info
+	&__info {
+		padding: 0px 0px 0px 10px;
+		font-size: 15px;
+		color: $mainColor;
+	}
 }

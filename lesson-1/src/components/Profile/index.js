@@ -1,47 +1,71 @@
-import { useContext } from "react"
-import { useDispatch, useSelector } from "react-redux";
-import { changeShowName, CHANGE_NAME } from "../../store/profile/actions";
-import { ThemeContext } from "../../utils/ThemeContex"
-import { FormMui } from "../FormMui";
-import "./styles.scss"
+import { set } from "@firebase/database";
+import { useContext, useState } from "react";
+import { connect } from "react-redux";
+import { auth, getProfileNameRef, logout, profileShowNameRef } from "../../services/firebase";
+import { changeShowName, changeName } from "../../store/profile/actions";
+import { selectName, selectShowName } from "../../store/profile/selectors";
+import { ThemeContext } from "../../utils/ThemeContext";
+import { Form } from "../Form";
 
-export const Profile = () => {
+
+
+export const ProfileToConnect = () => {
 	const { setMessageColor } = useContext(ThemeContext);
-
-	const dispatch = useDispatch();
-	const data = useSelector((state) => state);
+	const [name] = useState("");
+	const [showName] = useState(false);
 
 	const handleChangeShowName = () => {
-		dispatch(changeShowName);
-	}
+		set(profileShowNameRef, !showName);
+	};
 
 	const handleClick = () => {
-		setMessageColor((prevColor) => (prevColor === "red" ? "blue" : "red"))
-	}
+		setMessageColor((prevColor) => (prevColor === "red" ? "blue" : "red"));
+	};
 
 	const handleChangeName = (text) => {
-		dispatch({
-			type: CHANGE_NAME,
-			payload: text
-		});
-	}
+		console.log(auth.currentUser);
+		set(getProfileNameRef(auth.currentUser.uid), text);
+	};
+
+	const handleLogout = async () => {
+		try {
+			await logout();
+		} catch (e) {
+			console.warn(e);
+		}
+	};
 
 	return (
 		<>
-			<section className="profile">
-				<h3 className="profile__heading">Profile</h3>
-				<div>
-					<button onClick={handleClick}>Click me</button>
-				</div>
-				<div className="profile__info">
-					<input type="checkbox" onClick={handleChangeShowName} />
-					{data.showName && <span className="profile__text">{data.name}</span>}
-				</div>
-
-				<FormMui onSubmit={handleChangeName} />
-			</section>
+			<h3>Profile</h3>
+			<div>
+				<button onClick={handleLogout}>LOGOUT</button>
+			</div>
+			<div>
+				<button onClick={handleClick}>Change theme</button>
+			</div>
+			<div>
+				{showName && <h4>{name}</h4>}
+				<input type="checkbox" />
+				<button onClick={handleChangeShowName}>Change show name</button>
+			</div>
+			<Form onSubmit={handleChangeName} />
 		</>
-	)
-}
+	);
+};
 
+const mapStateToProps = (state) => ({
+	showName: selectShowName(state),
+	name: selectName(state),
+});
 
+const mapDispatchToProps = {
+	setShowName: () => changeShowName,
+	setName: changeName,
+};
+
+const ConnectedProfile = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(ProfileToConnect);
+export default ConnectedProfile;

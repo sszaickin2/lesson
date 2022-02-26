@@ -1,18 +1,47 @@
-@import "../../change.scss";
+@import "../../index.scss";
 
-.mui-form {
-	// .mui-form__input
+.form {
+	// .form__content
+	&__content {
+		display: flex;
+		width: 100%;
+		height: 35px;
+	}
+	// .form__input
 	&__input {
-		width: 94%;
-		height: 40px;
+		display: flex;
+		width: 80%;
 		background-color: transparent;
-		color: $textColor;
-		font-size: 18px;
-		padding: 0px 0px 0px 15px;
 		border: 2px solid $hrColor;
+		font-size: 16px;
+		color: $mainColor;
+		padding: 0px 0px 0px 10px;
 		outline: none;
 		&:focus {
-			border: 2px solid $hoverColor;
+			border: 2px solid $activeColor;
+		}
+		@media (any-hover: hover){
+			&:hover{
+				transition: all 0.3s ease 0s;
+				border: 2px solid $activeColor;
+			}
+		}
+	}
+	// .form__button
+	&__button {
+		display: flex;
+		justify-content:center;
+		align-items: center;
+		width: 20%;
+		background-color: transparent;
+		color: $mainColor;
+		border: 2px solid $hrColor;
+		font-size: 15px;
+		@media (any-hover: hover){
+			&:hover{
+				transition: all 0.3s ease 0s;
+				border: 2px solid $activeColor;
+			}
 		}
 	}
 }

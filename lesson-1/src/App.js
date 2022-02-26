@@ -1,7 +1,7 @@
-import { Router } from './components/Router';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './store';
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { Router } from "./components/Router";
+import { persistor, store } from "./store";
 
 const App = () => (
 	<Provider store={store}>
@@ -9,6 +9,6 @@ const App = () => (
 			<Router />
 		</PersistGate>
 	</Provider>
-)
+);
 
 export default App;

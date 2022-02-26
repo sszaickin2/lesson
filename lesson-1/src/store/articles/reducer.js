@@ -5,7 +5,7 @@ const initialState = {
 	data: [],
 	error: null,
 	status: FETCH_STATUSES.IDLE,
-}
+};
 
 export const articlesReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -33,4 +33,4 @@ export const articlesReducer = (state = initialState, action) => {
 		default:
 			return state;
 	}
-}
+};

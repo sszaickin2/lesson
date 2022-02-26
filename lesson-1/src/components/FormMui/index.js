@@ -1,14 +1,13 @@
-import { useEffect, useState, useRef } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "../../utils/ThemeContext";
 import "./styles.scss";
-
 
 export const FormMui = ({ onSubmit }) => {
 	const [value, setValue] = useState("");
-	const inputFocus = useRef();
 
 	const handleChange = (e) => {
 		setValue(e.target.value);
-	}
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -16,13 +15,19 @@ export const FormMui = ({ onSubmit }) => {
 		setValue("");
 	};
 
-	useEffect(() => {
-		inputFocus.current?.focus();
-	}, []);
-
 	return (
-		<form className="mui-form" onSubmit={handleSubmit}>
-			<input className="mui-form__input" type="text" ref={inputFocus} value={value} onChange={handleChange} placeholder="Название чата..." />
+		<form className="form__content" onSubmit={handleSubmit}>
+			<input className="form__input" value={value} onChange={handleChange} />
+			<button className="form__button" variant="contained">Send</button>
 		</form>
-	)
-}
+	);
+};
+
+const withContext = (Component) => {
+	return (props) => {
+		const { messageColor } = useContext(ThemeContext);
+		return <Component messageColor={messageColor} {...props} />;
+	};
+};
+
+export const FormWithLogger = withContext(FormMui);

@@ -1,54 +1,75 @@
-import { useState } from "react";
-import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom"
-import { ThemeContext } from "../../utils/ThemeContex";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+
+import { ThemeContext } from "../../utils/ThemeContext";
 import { Articles } from "../Articles/Articles";
-import { Chat } from '../Chat';
+import { Chat } from "../Chat";
 import { ChatList } from "../ChatList";
-import { Profile } from "../Profile";
-import "./styles.scss"
-
-const Home = () => <h2>Home</h2>;
-
+import { Home } from "../Home/Home";
+import { PrivateRoute } from "../PrivateRoute/PrivateRoute";
+import ConnectedProfile from "../Profile";
+import { PublicRoute } from "../PublicRoute/PublicRoute";
+import { auth } from "../../services/firebase";
+import "./router.scss"
 
 export const Router = () => {
+	const [messageColor, setMessageColor] = useState("red");
+	const [authed, setAuthed] = useState(false);
 
-	const [messageColor, setMessageColor] = useState('blue');
+	const unauthorize = () => {
+		setAuthed(false);
+	};
 
 	const contextValue = {
 		messageColor,
 		setMessageColor,
 	};
 
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, (user) => {
+			if (user) {
+				setAuthed(true);
+			} else {
+				setAuthed(false);
+			}
+		});
+
+		return unsubscribe;
+	}, []);
+
 	return (
 		<ThemeContext.Provider value={contextValue}>
-			<div className="App">
-				<BrowserRouter>
-					<header className="menu">
-						<span>
-							<NavLink className="menu__link" style={({ isActive }) => ({ color: isActive ? '#AA4B41' : '#D4DDE1' })} to="/">Home</NavLink>
-						</span>
-						<span>
-							<NavLink className="menu__link" style={({ isActive }) => ({ color: isActive ? '#AA4B41' : '#D4DDE1' })} to="chats">Chats</NavLink>
-						</span>
-						<span>
-							<NavLink className="menu__link" style={({ isActive }) => ({ color: isActive ? '#AA4B41' : '#D4DDE1' })} to="/profile">Profile</NavLink>
-						</span>
-						<span>
-							<NavLink className="menu__link" style={({ isActive }) => ({ color: isActive ? '#AA4B41' : '#D4DDE1' })} to="/Articles">Articles</NavLink>
-						</span>
-					</header>
+			<BrowserRouter>
 
-					<Routes>
-						<Route path="/" element={<Home />} />
-						<Route path="/Articles" element={<Articles /> } />
-						<Route path="/profile" element={<Profile changeColor={setMessageColor} />} />
-						<Route path="chats" element={<ChatList />}>
-							<Route path=":chatId" element={<Chat />} />
-						</Route>
-						<Route path="*" element={<h2>404</h2>} />
-					</Routes>
-				</BrowserRouter>
-			</div>
+				<div className="menu">
+					<NavLink className="menu__link" to="/">Home</NavLink>
+					<NavLink className="menu__link" to="/profile">Profile</NavLink>
+					<NavLink className="menu__link" to="/chats">Chats</NavLink>
+					<NavLink className="menu__link" to="/articles">Articles</NavLink>
+				</div>
+
+
+				<Routes>
+
+					<Route path="/" element={<PublicRoute authed={authed} />}>
+						<Route path="" element={<Home />} />
+						<Route path="/signup" element={<Home isSignUp />} />
+					</Route>
+
+					<Route path="/profile" element={<PrivateRoute authed={authed} />}>
+						<Route path="" element={<ConnectedProfile onLogout={unauthorize} />} />
+					</Route>
+
+					<Route path="chats" element={<ChatList />}>
+						<Route path=":chatId" element={<Chat />} />
+					</Route>
+
+					<Route path="/articles" element={<Articles />} />
+					<Route path="*" element={<h2>404</h2>} />
+
+				</Routes>
+			</BrowserRouter>
 		</ThemeContext.Provider>
 	);
 };

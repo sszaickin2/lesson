@@ -1,17 +1,15 @@
 import { AUTHORS } from "../../utils/constants";
 
-export const ADD_MESSAGE = 'MESSAGES::ADD_MESSAGE';
-export const DELETE_MESSAGE = 'MESSAGES::DELETE_MESSAGE';
-export const EDIT_MESSAGE = 'MESSAGES::EDIT_MESSAGE';
-
-
+export const ADD_MESSAGE = "MESSAGES::ADD_MESSAGE";
+export const DELETE_MESSAGE = "MESSAGES::DELETE_MESSAGE";
+export const EDIT_MESSAGE = "MESSAGES::EDIT_MESSAGE";
 
 export const addMessage = (chatId, newMsg) => ({
 	type: ADD_MESSAGE,
 	payload: {
 		chatId,
 		newMsg,
-	}
+	},
 });
 
 export const deleteMessage = (chatId, idToDelete) => ({
@@ -19,18 +17,16 @@ export const deleteMessage = (chatId, idToDelete) => ({
 	payload: {
 		chatId,
 		idToDelete,
-	}
+	},
 });
-
 export const editMessage = (chatId, idToEdit, newText) => ({
 	type: EDIT_MESSAGE,
 	payload: {
 		chatId,
 		idToEdit,
 		newText,
-	}
+	},
 });
-
 
 let timeout;
 
@@ -41,11 +37,11 @@ export const addMessageWithThunk = (chatId, newMsg) => (dispatch, getState) => {
 		clearTimeout(timeout);
 		timeout = setTimeout(() => {
 			const msgFromBot = {
-				text: "Шалом",
+				text: "still here",
 				author: AUTHORS.BOT,
 				id: `msg-${Date.now()}`,
-			}
+			};
 			dispatch(addMessage(chatId, msgFromBot));
-		}, 1000)
+		}, 1000);
 	}
-}
+};
